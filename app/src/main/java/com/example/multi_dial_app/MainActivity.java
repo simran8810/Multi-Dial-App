@@ -30,9 +30,9 @@ public class MainActivity extends Activity {
 
         numbers = new ArrayList<>();
 
-        numbers.add("tel:111111");
-        numbers.add("tel:22222");
-        numbers.add("tel:33333");
+        numbers.add("tel:8765342756");
+        numbers.add("tel:9785632764");
+        numbers.add("tel:7853624567");
 
 
         //TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);

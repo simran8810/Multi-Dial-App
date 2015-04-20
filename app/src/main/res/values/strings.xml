@@ -4,12 +4,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="question">All good?</string>
-    <string name="doIt">Yes</string>
-    <string name="dontDoIt">No</string>
+    <string name="noAnswer">No Answer</string>
+    <string name="callLater">Call Later</string>
+    <string name="received">Received</string>
+    <string name="feedback">Feedback</string>
     <string name="callMaybe">Do you want to keep calling?</string>
     <string name="continueCall">Continue</string>
     <string name="stopCall">Stop</string>
     <string name="startCalling">Start Calling</string>
 
+    <string name="note">NOTE</string>
 
 </resources>

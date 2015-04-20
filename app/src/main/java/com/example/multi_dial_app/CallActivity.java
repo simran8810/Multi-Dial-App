@@ -10,9 +10,6 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-/**
- * Created by dhruv on 24/3/15.
- */
 public class CallActivity extends Activity {
 
 
