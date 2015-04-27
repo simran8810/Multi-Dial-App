@@ -1,5 +1,7 @@
 package com.example.multi_dial_app;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.app.Activity;
@@ -8,34 +10,35 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import java.util.ArrayList;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 
 public class MainActivity extends Activity {
 
-    private ArrayList<String> numbers;
+    private static String numbers;
 
     private Integer i =0;
 
     private final Integer RESCODE = 1;
-
-    private int prevState = TelephonyManager.CALL_STATE_IDLE;
-
-    private int currentState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        numbers = new ArrayList<>();
+        numbers = "tel:8765342756";
 
-        numbers.add("tel:8765342756");
-        numbers.add("tel:9785632764");
-        numbers.add("tel:7853624567");
-
-
-        //TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
         Button btn = (Button)findViewById(R.id.startCalling);
 
@@ -43,19 +46,11 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                //while(i<numbers.size())
-                //{
                 makeACall();
 
-                //}
 
             }
         });
-
-
-
-        //TelephonyMgr.listen(new TeleListener(),
-        //          PhoneStateListener.LISTEN_CALL_STATE);
 
 
 
@@ -66,73 +61,88 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-    /*
-        class TeleListener extends PhoneStateListener {
-            public void onCallStateChanged(int state, String incomingNumber) {
-                super.onCallStateChanged(state, incomingNumber);
 
 
-
-                switch (state) {
-                    case TelephonyManager.CALL_STATE_IDLE:
-                        // CALL_STATE_IDLE;
-
-                        break;
-                    case TelephonyManager.CALL_STATE_OFFHOOK:
-                        // CALL_STATE_OFFHOOK;
-
-                        break;
-                    case TelephonyManager.CALL_STATE_RINGING:
-                        // CALL_STATE_RINGING
-
-                        break;
-                    default:
-                        break;
-                }
-
-
-                currentState = state;
-
-
-            }
-
-        }
-
-
-
-        public void check()
-        {
-            if((currentState == TelephonyManager.CALL_STATE_IDLE) && (prevState != TelephonyManager.CALL_STATE_IDLE))
-            {
-                if(i<numbers.size())
-                    makeACall();
-                else
-                    finish();
-            }
-
-            prevState = currentState;
-
-        }
-    */
     public void makeACall()
     {
 
-        String url =  numbers.get(i);
+        new getNewContact().execute("http://172.16.64.127:8000/");
 
-        Log.d("mainurl",url);
-
-        i++;
-
-        Intent intent = new Intent(getApplicationContext(), CallActivity.class);
-
-        intent.putExtra("URLKEY",url);
-
-        // startActivity(intent);
-
-        startActivityForResult(intent, RESCODE);
 
 
     }
+
+
+
+    private class getNewContact extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            // Showing progress dialog
+            ProgressDialog pDialog = new ProgressDialog(MainActivity.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        protected String doInBackground(String... urls) {
+            // Creating HTTP client
+            HttpClient httpClient = new DefaultHttpClient();
+            // Creating HTTP Post
+            HttpPost httpPost = new HttpPost(urls[0]);
+
+            // Making HTTP Request
+            try {
+                HttpResponse response = httpClient.execute(httpPost);
+                HttpEntity entity = response.getEntity();
+                String st  = EntityUtils.toString(entity);
+                return st;
+            } catch (ClientProtocolException e) {
+                // writing exception to log
+                e.printStackTrace();
+            } catch (IOException e) {
+                // writing exception to log
+                e.printStackTrace();
+
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String st) {
+            Log.e("Http Response:", st);
+
+            JSONObject jsn = null;
+            try {
+                jsn = new JSONObject(st);
+                String name = jsn.getString("name");
+                String number = jsn.getString("number");
+
+                numbers = (number);
+                String url =  numbers;
+
+                Intent intent = new Intent(getApplicationContext(), CallActivity.class);
+
+                intent.putExtra("URLKEY",url);
+                intent.putExtra("name",name);
+
+                // startActivity(intent);
+
+                startActivityForResult(intent, RESCODE);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+
+    }
+
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -151,15 +161,14 @@ public class MainActivity extends Activity {
             }
             else if(message.equals("CONTINUE"))
             {
-                if(i<numbers.size()) {
+
                     makeACall();
-                }
-                else
-                    i=0;
+
             }
 
         }
 
     }
+
 
 }

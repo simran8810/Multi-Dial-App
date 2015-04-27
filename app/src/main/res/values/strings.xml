@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CallUpMate</string>
+    <string name="app_name">TeleCaller</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -9,9 +9,12 @@
     <string name="received">Received</string>
     <string name="feedback">Feedback</string>
     <string name="callMaybe">Do you want to keep calling?</string>
-    <string name="continueCall">Continue</string>
+    <string name="submitFeedback">Submit Feedback</string>
     <string name="stopCall">Stop</string>
     <string name="startCalling">Start Calling</string>
+    <string name="nextCall">Next</string>
+    <string name="defaultFeedback">No feedback</string>
+
 
     <string name="note">NOTE</string>
 
