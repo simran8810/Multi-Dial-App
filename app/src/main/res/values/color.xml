@@ -3,10 +3,12 @@
     <color name="grey">#BDBDBD</color>
     <color name="white">#FFFFFF</color>
     <color name="red">#FF0000</color>
-    <color name="primary">#FFEB3B</color>
-    <color name="primaryDark">#FBC02D</color>
-    <color name="accent">#FFF59D</color>
+    <color name="primary">#00BCD4</color>
+    <color name="primaryDark">#0097A7</color>
+    <color name="accent">#B2EBF2</color>
     <color name="black">#000000</color>
     <color name="green">#C6FF00</color>
     <color name="lightGrey">#EEEEEE</color>
+    <color name="pink">#e91e63</color>
+    <color name="pink_pressed">#ec407a</color>
 </resources>

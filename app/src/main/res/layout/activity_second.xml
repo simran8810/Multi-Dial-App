@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/accent">
+    android:background="@color/white"
+    android:id="@+id/background">
 
     <!-- Header aligned to top -->
 
@@ -13,42 +14,79 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:gravity="center" >
+        <Switch
+            android:id="@+id/togglebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"/>
 
-            <ToggleButton
-                android:id="@+id/togglebutton"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textOn="GO DORMANT"
-                android:textOff="GO ACTIVE"
-                android:background="@drawable/toggle_button"
-                android:onClick="onToggleClicked"/>
+        <TextView
+            android:id="@+id/campaignTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:text="Campaign"
+            android:textColor="@color/primary"
+            android:layout_marginLeft="20dp"
+            android:textStyle="italic"
+            android:textSize="20dp"
+            />
+
+            <!--<ToggleButton-->
+                <!--android:id="@+id/togglebutton"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="10dp"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:textSize="16sp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textOn="GO DORMANT"-->
+                <!--android:textOff="GO ACTIVE"-->
+                <!--android:background="@drawable/toggle_button"-->
+                <!--android:onClick="onToggleClicked"/>-->
 
     </RelativeLayout>
 
     <!-- Footer aligned to bottom -->
 
-    <RelativeLayout
-    android:id="@+id/footer"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:gravity="center" >
 
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/continueCalling"
-                android:text="@string/submitFeedback"
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:background="@drawable/submit_button"
-                />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/footer">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/continueCalling"
+            android:text="@string/submitFeedback"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/button"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/next"
+            android:text="@string/nextCall"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button"
+            />
+
 
 
     </RelativeLayout>
@@ -65,8 +103,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/accent">
+        android:layout_height="match_parent">
 
 
 
@@ -81,7 +118,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="On Call"
+                android:text="On Call:"
                 style="@style/textMyStyle"
                 android:padding="10dp">
             </TextView>
@@ -89,12 +126,11 @@
                 android:id="@+id/personName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ravi Kumar"
+                android:text=""
                 style="@style/textMyStyle"
-                android:layout_marginLeft="20dp"
                 android:padding="10dp"
-                >
-            </TextView>
+                />
+
         </LinearLayout>
 
         <LinearLayout
@@ -114,7 +150,7 @@
                 android:id="@+id/personNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="8787878787"
+                android:text=""
                 style="@style/textMyStyle"
                 android:layout_marginLeft="20dp"
                 android:padding="10dp"
@@ -129,40 +165,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
-            <RadioButton android:id="@+id/radio_noAnswer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/noAnswer"
-                android:onClick="onRadioButtonClicked"
-                android:background="?android:attr/selectableItemBackground"
-                android:layout_margin="5dp"
-                style="@style/textMyStyle"/>
-            <RadioButton android:id="@+id/radio_callLater"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/callLater"
-                android:onClick="onRadioButtonClicked"
-                android:background="?android:attr/selectableItemBackground"
-                android:layout_margin="5dp"
-                style="@style/textMyStyle"/>
-            <RadioButton android:id="@+id/radio_recieved"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/received"
-                android:onClick="onRadioButtonClicked"
-                android:background="?android:attr/selectableItemBackground"
-                android:layout_margin="5dp"
-                style="@style/textMyStyle"/>
-            <RadioButton android:id="@+id/radio_feedback"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/feedback"
-                android:onClick="onRadioButtonClicked"
-                android:layout_margin="5dp"
-                style="@style/textMyStyle"
-                android:background="?android:attr/selectableItemBackground"
-                />
-
         </RadioGroup>
 
 
@@ -198,33 +200,10 @@
             </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:id="@+id/next"
-                android:text="@string/nextCall"
-                android:textSize="16sp"
-                android:textStyle="italic"
-                android:background="@drawable/nextcall_button"
-                />
-
-        </LinearLayout>
-
-
-
 
 
 
     </LinearLayout>
-
-
 
 
     </ScrollView>

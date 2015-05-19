@@ -9,13 +9,22 @@
     <string name="received">Received</string>
     <string name="feedback">Feedback</string>
     <string name="callMaybe">Do you want to keep calling?</string>
-    <string name="submitFeedback">Submit Feedback</string>
+    <string name="submitFeedback">Submit</string>
     <string name="stopCall">Stop</string>
-    <string name="startCalling">Start Calling</string>
+    <string name="login">LOGIN</string>
     <string name="nextCall">Next</string>
+    <string name="Call">Call</string>
     <string name="defaultFeedback">No feedback</string>
-
-
-    <string name="note">NOTE</string>
+    <string name="enter_email">USERNAME</string>
+    <string name="password">PASSWORD</string>
+    <string name="connect_facebook">No feedback</string>
+    <string name="logout">Logout</string>
+    <string name="isLoggedIn">isLoggedIn</string>
+    <string name="note">Remarks</string>
+    <string name="callerName">telecallerName</string>
+    <string name="defaultUser">Telecaller</string>
+    <string name="noCampaignChoosen">No Choice</string>
+    <string name="runningCampaign">RunningCampaign</string>
+    <string name="serverUrl">http://192.168.1.29:8000/</string>
 
 </resources>

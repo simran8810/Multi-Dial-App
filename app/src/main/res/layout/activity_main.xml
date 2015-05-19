@@ -1,20 +1,105 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
     tools:context=".MainActivity"
-    android:background="@color/accent">
+    android:background="@color/accent"
+    android:orientation="vertical"
+    android:layout_gravity="center">
 
-    <Button
+
+
+
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/startCalling"
-        android:padding="20dp"
-        android:text="@string/startCalling"
-        android:textSize="20dp"
-        android:layout_gravity="center"
-        android:elevation="20dp"
-        android:background="@color/primaryDark"/>
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_launcher" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/icon_login_email" />
+
+                <EditText
+                    android:id="@+id/login_email"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"
+                    android:hint="@string/enter_email"
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp"
+                    android:textColor="#191919"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/input_field_divider" />
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/icon_password" />
+
+                <EditText
+                    android:id="@+id/login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@null"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:textColor="#191919"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/startCalling"
+                android:padding="20dp"
+                android:text="@string/login"
+                android:textSize="20dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:elevation="20dp"
+                android:background="@color/primaryDark"/>
+
+
+        </LinearLayout>
 
 </LinearLayout>
+
+
