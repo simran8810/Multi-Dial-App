@@ -12,7 +12,7 @@
     <string name="submitFeedback">Submit</string>
     <string name="stopCall">Stop</string>
     <string name="login">LOGIN</string>
-    <string name="nextCall">Next</string>
+    <string name="call">Call</string>
     <string name="Call">Call</string>
     <string name="defaultFeedback">No feedback</string>
     <string name="enter_email">USERNAME</string>
@@ -25,6 +25,8 @@
     <string name="defaultUser">Telecaller</string>
     <string name="noCampaignChoosen">No Choice</string>
     <string name="runningCampaign">RunningCampaign</string>
-    <string name="serverUrl">http://192.168.1.29:8000/</string>
+    <string name="leadDetailTitle">Lead Detail</string>
+    <string name="submitDetailTitle">Submit Detail</string>
+    <string name="serverUrl">http://172.16.64.137:8001/</string>
 
 </resources>

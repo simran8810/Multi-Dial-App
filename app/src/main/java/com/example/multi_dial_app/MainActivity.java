@@ -1,5 +1,9 @@
 package com.example.multi_dial_app;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -57,6 +61,9 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
+        /********************************************************/
+
+
         serverUrl=getResources().getString(R.string.serverUrl);
 
 
@@ -81,7 +88,21 @@ public class MainActivity extends Activity {
     private class authUser extends AsyncTask<String, Void, String> {
 
 
+        ProgressDialog dialog=new ProgressDialog(MainActivity.this);
+        @Override
+        protected void onPreExecute(){
 
+            // create dialog here
+            //super.onPreExecute();
+            dialog.setMessage("Authenticating...");
+            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            dialog.setProgress(0);
+            dialog.show();
+
+        }
+
+
+        @Override
         protected String doInBackground(String... urls) {
 
             username = name.getText().toString();
@@ -122,6 +143,10 @@ public class MainActivity extends Activity {
 
         @Override
         protected void onPostExecute(String st) {
+
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
 
             try{
                 Log.e("Posting data", st);
@@ -167,9 +192,6 @@ public class MainActivity extends Activity {
 
 
                         Intent intent = new Intent(getApplicationContext(), CallActivity.class);
-
-
-
 
                         startActivity(intent);
                     }
