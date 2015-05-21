@@ -1,20 +1,15 @@
 package com.example.multi_dial_app;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -36,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends Activity {
+public class LoginActivity extends Activity {
 
 
     Button btn;
@@ -59,7 +54,7 @@ public class MainActivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login_screen_activity);
 
         /********************************************************/
 
@@ -88,7 +83,7 @@ public class MainActivity extends Activity {
     private class authUser extends AsyncTask<String, Void, String> {
 
 
-        ProgressDialog dialog=new ProgressDialog(MainActivity.this);
+        ProgressDialog dialog=new ProgressDialog(LoginActivity.this);
         @Override
         protected void onPreExecute(){
 

@@ -9,7 +9,7 @@
     <string name="received">Received</string>
     <string name="feedback">Feedback</string>
     <string name="callMaybe">Do you want to keep calling?</string>
-    <string name="submitFeedback">Submit</string>
+    <string name="submitFeedback">Submit Feadback</string>
     <string name="stopCall">Stop</string>
     <string name="login">LOGIN</string>
     <string name="call">Call</string>
@@ -25,8 +25,11 @@
     <string name="defaultUser">Telecaller</string>
     <string name="noCampaignChoosen">No Choice</string>
     <string name="runningCampaign">RunningCampaign</string>
-    <string name="leadDetailTitle">Lead Detail</string>
-    <string name="submitDetailTitle">Submit Detail</string>
+    <string name="leadDetailTitle">Person Detail</string>
+    <string name="submitDetailTitle">Submit Feedback</string>
     <string name="serverUrl">http://172.16.64.137:8001/</string>
+    <string name="callRecords">Call Details</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
 
 </resources>

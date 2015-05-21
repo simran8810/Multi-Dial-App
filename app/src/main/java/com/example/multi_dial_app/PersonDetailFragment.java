@@ -11,15 +11,12 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -47,7 +44,7 @@ import java.util.List;
 /**
  * Created by ht on 19/5/15.
  */
-public class LeadDetailFragment extends Fragment implements CompoundButton.OnCheckedChangeListener{
+public class PersonDetailFragment extends Fragment implements CompoundButton.OnCheckedChangeListener{
 
     private static View view;
 
@@ -144,7 +141,7 @@ public class LeadDetailFragment extends Fragment implements CompoundButton.OnChe
                 call();
 
                 // Do something after 5s = 5000ms
-                Fragment fragment = new SubmitCallDetailsFragment();
+                Fragment fragment = new SubmitFeedbackFragment();
 
 
                 Bundle bundle = new Bundle();

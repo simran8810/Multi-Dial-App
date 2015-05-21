@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -43,7 +42,7 @@ import java.util.List;
 
 
 
-public class SubmitCallDetailsFragment extends Fragment implements CompoundButton.OnCheckedChangeListener{
+public class SubmitFeedbackFragment extends Fragment implements CompoundButton.OnCheckedChangeListener{
 
     private static View view;
 
@@ -57,7 +56,7 @@ public class SubmitCallDetailsFragment extends Fragment implements CompoundButto
 
     private static EditText note;
 
-    private static ImageButton submitBtn;
+    private static Button submitBtn;
 
     private static RelativeLayout background;
 
@@ -140,7 +139,7 @@ public class SubmitCallDetailsFragment extends Fragment implements CompoundButto
 
         note = (EditText)view.findViewById(R.id.companyNameEditText);
 
-        submitBtn = (ImageButton)view.findViewById(R.id.continueCalling);
+        submitBtn = (Button)view.findViewById(R.id.continueCalling);
         submitBtn.setEnabled(true);
 
 
@@ -381,7 +380,7 @@ public class SubmitCallDetailsFragment extends Fragment implements CompoundButto
             Log.e("Posting data", st);
             Toast.makeText(getActivity(),"Successfully Submitted", Toast.LENGTH_SHORT).show();
 
-            Fragment fragment = new LeadDetailFragment();
+            Fragment fragment = new PersonDetailFragment();
 
 
             FragmentTransaction transaction = getFragmentManager().beginTransaction();

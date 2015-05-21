@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/accent"
+    android:id="@+id/background">
+
+
+    <RelativeLayout
+        android:id="@+id/mainContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+
+    </RelativeLayout>
+
+    <!-- Header aligned to top -->
+
+
+
+</RelativeLayout>
+
+
+        <!-- The navigation drawer -->
+<RelativeLayout
+    android:layout_width="250dp"
+    android:layout_height="match_parent"
+    android:id="@+id/drawerPane"
+    android:layout_gravity="start"
+    android:background="@color/grey">
+
+    <!-- Profile Box -->
+
+    <RelativeLayout
+        android:id="@+id/profileBox"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:padding="8dp"
+        android:background="@color/primary">
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:background="?android:attr/selectableItemBackground" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- List of Actions (pages) -->
+    <LinearLayout
+        android:id="@+id/navList"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/profileBox"
+        android:choiceMode="singleChoice"
+        android:orientation="vertical"
+        android:layout_marginBottom="48dp">
+
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="48dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/callRecords"
+                android:text="@string/callRecords"
+                android:layout_marginStart="56dp"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="48dp">
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/logout"
+                android:text="@string/logout"
+                android:textColor="@color/white"
+                android:layout_marginLeft="56dp"
+                android:textSize="14sp"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"/>
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v4.widget.DrawerLayout>
+

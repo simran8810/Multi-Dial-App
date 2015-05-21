@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 
 
 public class SplashScreenActivity extends Activity {
@@ -32,7 +31,7 @@ public class SplashScreenActivity extends Activity {
         }
         else{                         //if not we send him to candidate/recruiter screen
 
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
 
             startActivity(intent);
 
