@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -41,7 +42,11 @@ public class CallActivity extends ActionBarActivity{
 
     private Button logout;
 
+    private Button callRecords;
+
     private RelativeLayout background;
+
+    private Handler mHandler;
 
     private static Switch OnOffSwitch;
 
@@ -81,7 +86,7 @@ public class CallActivity extends ActionBarActivity{
         editor = preferences.edit();
         callerName = preferences.getString(getResources().getString(R.string.callerName),defaultValue);
         mUserName.setText(callerName);               //will set username for profile box
-        mEmail.setText("email");
+        mEmail.setText("htcampus@hindustantimes.com");
 
 
 
@@ -124,22 +129,34 @@ public class CallActivity extends ActionBarActivity{
         };
 
 
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        callRecords = (Button)findViewById(R.id.callRecords);
+        callRecords.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHandler = new Handler();
+                mHandler.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        mDrawerLayout.closeDrawers();
+                    }
+                }, 150);
+
+
+                Fragment fragment = new CallHistoryFragment();
+                replaceFragments(fragment, "callHistory");
+
+            }
+        });
 
 /***********************************************************/
+
         Fragment fragment = new PersonDetailFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragmentTransaction.add(R.id.background,fragment, "leadDetailFragment");
-
-        fragmentTransaction.addToBackStack(null);
-
-        fragmentTransaction.commit();
+        replaceFragments(fragment, "leadDetailFragment");
 
 /***********************************************************/
-
-
     }
 
 
@@ -190,8 +207,38 @@ public class CallActivity extends ActionBarActivity{
     }
 
 
+
     @Override
     public void onBackPressed() {
+
+        Fragment frag = getFragmentManager().findFragmentByTag("callHistory");
+
+
+        if((frag != null && frag.isVisible())) {
+            getFragmentManager().popBackStack();
+            //changeDrawerUpIndicator(true);
+                //super.onBackPressed();
+        }
+        else {
+                //getFragmentManager().popBackStack();
+        }
+    }
+
+
+
+
+    public void replaceFragments(Fragment newFragment, String tag)
+    {
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(R.id.mainContent, newFragment, tag);
+        transaction.addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
 
     }
 

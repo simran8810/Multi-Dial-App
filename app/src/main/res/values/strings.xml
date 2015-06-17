@@ -25,9 +25,11 @@
     <string name="defaultUser">Telecaller</string>
     <string name="noCampaignChoosen">No Choice</string>
     <string name="runningCampaign">RunningCampaign</string>
+    <string name="recording">recording</string>
     <string name="leadDetailTitle">Person Detail</string>
+    <string name="callHistory">Call History</string>
     <string name="submitDetailTitle">Submit Feedback</string>
-    <string name="serverUrl">http://172.16.64.137:8001/</string>
+    <string name="serverUrl">http://172.16.64.137:8000/</string>
     <string name="callRecords">Call Details</string>
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>

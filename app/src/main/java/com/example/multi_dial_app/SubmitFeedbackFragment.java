@@ -23,6 +23,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.multi_dial_app.database.SqlController;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -34,6 +36,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -60,13 +63,17 @@ public class SubmitFeedbackFragment extends Fragment implements CompoundButton.O
 
     private static RelativeLayout background;
 
+    private static SqlController dbcon;
+
 
 
     private static ArrayList<String> radioButtonChoices;
 
-    private String serverUrl;
+    private static String serverUrl;
 
-    private String radioChoice;
+    private static String radioChoice;
+
+    private static String callerName;
 
     private static String campaign;
 
@@ -85,6 +92,9 @@ public class SubmitFeedbackFragment extends Fragment implements CompoundButton.O
     private static String leadNumber;
 
     private String defaultValue;
+
+    private String currentDatetime;
+
 
 
 
@@ -126,6 +136,10 @@ public class SubmitFeedbackFragment extends Fragment implements CompoundButton.O
 
         //get running Campaign from SharedPreferences
         SharedPreferences preferences = getActivity().getSharedPreferences("user_info", 0);
+
+
+        callerName = preferences.getString(getResources().getString(R.string.callerName),"telecaller");
+        campaign = preferences.getString(getResources().getString(R.string.runningCampaign),"campaign");
 
 
 
@@ -368,18 +382,60 @@ public class SubmitFeedbackFragment extends Fragment implements CompoundButton.O
         @Override
         protected void onPostExecute(String st) {
 
+
+
             if (dialog.isShowing()) {
                 dialog.dismiss();
             }
 
-            submitBtn.setEnabled(false);
 
+
+            //Calender object to store current date and time in call history table
+            Calendar cal = Calendar.getInstance();
+            Long callDateTime  = cal.getTimeInMillis();
+
+            int am_or_pm = cal.get(Calendar.AM_PM);
+            if (am_or_pm == 1){
+                currentDatetime = cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + "pm" +
+                        " " + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.DAY_OF_MONTH) +
+                        "-" + cal.get(Calendar.YEAR);
+            }
+            else{
+                currentDatetime = cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + "am" +
+                        " " + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.DAY_OF_MONTH) +
+                        "-" + cal.get(Calendar.YEAR);
+            }
+
+
+
+            //insert call feedback to local database
+            dbcon = new SqlController(getActivity().getApplicationContext());
+
+            //open db connection
+            dbcon.open();
+
+            dbcon.insertCallData(callerName, campaign, callName, callNumber, "Delhi",
+                    feedback, detailNote, currentDatetime);
+
+            //close db connection
+            dbcon.close();
+
+
+
+            //reset all text fields on screen
             if (note != null) note.setText("");
             if (name != null) name.setText("");
             if (number != null) number.setText("");
-            Log.e("Posting data", st);
+
+
+
+            //Alert of successful feedback submit
             Toast.makeText(getActivity(),"Successfully Submitted", Toast.LENGTH_SHORT).show();
 
+
+
+
+            //Begin person detail fragment
             Fragment fragment = new PersonDetailFragment();
 
 

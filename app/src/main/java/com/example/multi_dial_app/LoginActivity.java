@@ -142,29 +142,22 @@ public class LoginActivity extends Activity {
             if (dialog.isShowing()) {
                 dialog.dismiss();
             }
-
             try{
                 Log.e("Posting data", st);
-
                 if (st.equals("failure")){
-
                     Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
                 }
-
                 else {
-
-
                     try{
-
                         SharedPreferences preferences = getApplicationContext().getSharedPreferences("user_info", 0);
                         SharedPreferences.Editor editor = preferences.edit();
-
 
                         JSONObject jsn = null;
                         jsn = new JSONObject(st);
 
                         JSONArray jsonArray = jsn.getJSONArray("feedbackChoices");
                         String campaignObject = jsn.getString("campaign");
+                       // String recording = jsn.getString("call_recording");
 
                         ArrayList<String> feedbackChoiceList = new ArrayList<String>();
                         for (int i=0; i<jsonArray.length(); i++) {
@@ -176,10 +169,10 @@ public class LoginActivity extends Activity {
                             editor.putString("choice"+i,feedbackChoiceList.get(i));
                         }
                         editor.putInt("choiceSize",feedbackChoiceList.size());
-
                         editor.putBoolean(getResources().getString(R.string.isLoggedIn), true);
                         editor.putString(getResources().getString(R.string.callerName), username);
                         editor.putString(getResources().getString(R.string.runningCampaign),String.valueOf(campaignObject));
+                        //editor.putString(getResources().getString(R.string.recording),String.valueOf(recording));
                         editor.apply();
 
                         String camp = preferences.getString(getResources().getString(R.string.runningCampaign),"helo");

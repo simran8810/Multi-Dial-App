@@ -36,7 +36,7 @@
     android:layout_height="match_parent"
     android:id="@+id/drawerPane"
     android:layout_gravity="start"
-    android:background="@color/grey">
+    android:background="@color/white">
 
     <!-- Profile Box -->
 
@@ -52,7 +52,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="42dp"
-            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="15dp"
             android:orientation="vertical" >
 
@@ -77,34 +77,58 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <!-- List of Actions (pages) -->
+    <!--&lt;!&ndash; List of Actions (pages) &ndash;&gt;-->
+    <!--<LinearLayout-->
+        <!--android:id="@+id/navList"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@+id/profileBox"-->
+        <!--android:choiceMode="singleChoice"-->
+        <!--android:orientation="vertical"-->
+        <!-->-->
+
     <LinearLayout
-        android:id="@+id/navList"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/profileBox"
-        android:choiceMode="singleChoice"
-        android:orientation="vertical"
-        android:layout_marginBottom="48dp">
+            android:id="@+id/navList"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_below="@+id/profileBox"
+            android:choiceMode="singleChoice"
+            android:paddingTop="24dp"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="0dp"
+            android:background="@android:color/background_light"
+            android:orientation="vertical">
+
+
 
 
         <LinearLayout
 
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="48dp">
+            android:layout_marginBottom="20dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_history"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"/>
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/callRecords"
                 android:text="@string/callRecords"
-                android:layout_marginStart="56dp"
+                android:layout_marginLeft="20dp"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:layout_gravity="center_vertical"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:background="@color/white"/>
 
 
         </LinearLayout>
@@ -113,22 +137,31 @@
 
         <LinearLayout
 
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="48dp">
+            android:layout_marginBottom="20dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"/>
 
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/logout"
                 android:text="@string/logout"
-                android:textColor="@color/white"
-                android:layout_marginLeft="56dp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="20dp"
                 android:textSize="14sp"
                 android:layout_gravity="center_vertical"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:background="@color/white"/>
 
 
 

@@ -24,6 +24,7 @@
             android:layout_margin="5dp"
             android:elevation="20dp"
             android:text="@string/submitFeedback"
+            android:textSize="20sp"
             android:background="@drawable/button"
 
             />

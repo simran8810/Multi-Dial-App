@@ -6,17 +6,22 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -41,9 +46,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ht on 19/5/15.
- */
+
 public class PersonDetailFragment extends Fragment implements CompoundButton.OnCheckedChangeListener{
 
     private static View view;
@@ -52,13 +55,15 @@ public class PersonDetailFragment extends Fragment implements CompoundButton.OnC
 
     private static TextView campaignTextView;
 
+    private static TextView recordingTextView;
+
     private static TextView name;
 
     private static TextView number;
 
     private static Switch OnOffSwitch;
 
-    private static ImageButton contBtn;
+    private static Button contBtn;
 
     private static RelativeLayout background;
 
@@ -75,6 +80,8 @@ public class PersonDetailFragment extends Fragment implements CompoundButton.OnC
 
     private static String campaign;
 
+    private static String recording;
+
     private String defaultValue;
 
     private static FragmentTransaction transaction;
@@ -83,11 +90,18 @@ public class PersonDetailFragment extends Fragment implements CompoundButton.OnC
 
     @Override
     public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ((CallActivity) activity).setTitle(getString(R.string.leadDetailTitle));
-    }
 
-    
+        super.onAttach(activity);
+
+        ((CallActivity) activity).setTitle(getString(R.string.leadDetailTitle));
+
+        TelephonyManager TelephonyMgr = (TelephonyManager) getActivity().getSystemService
+                (Context.TELEPHONY_SERVICE);
+
+        TelephonyMgr.listen(new CallRecorder(getActivity().getApplicationContext()),
+                PhoneStateListener.LISTEN_CALL_STATE);
+
+    }
 
 
     @Override
@@ -102,18 +116,16 @@ public class PersonDetailFragment extends Fragment implements CompoundButton.OnC
     }
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.lead_detail_fragment, container, false);
 
 
-
         //get running Campaign from SharedPreferences
         SharedPreferences preferences = getActivity().getSharedPreferences("user_info", 0);
         campaign = preferences.getString(getResources().getString(R.string.runningCampaign), defaultValue);
+        recording = preferences.getString(getResources().getString(R.string.recording), defaultValue);
 
 
         serverUrl = getResources().getString(R.string.serverUrl);
@@ -125,13 +137,15 @@ public class PersonDetailFragment extends Fragment implements CompoundButton.OnC
         campaignTextView.setText(campaign);
 
 
+        recordingTextView = (TextView) view.findViewById(R.id.recording);
+
+
         name = (TextView)view.findViewById(R.id.personName);
         number = (TextView)view.findViewById(R.id.personNumber);
 
 
-        contBtn = (ImageButton)view.findViewById(R.id.next);
+        contBtn = (Button)view.findViewById(R.id.next);
         contBtn.setEnabled(true);
-
 
 
         //attach a onclicklistener to call button
@@ -149,7 +163,9 @@ public class PersonDetailFragment extends Fragment implements CompoundButton.OnC
                 bundle.putString("number", number.getText().toString());
                 bundle.putString("lead_id", lead_id);
 
+
                 fragment.setArguments(bundle);
+
 
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.popBackStack();
@@ -158,20 +174,13 @@ public class PersonDetailFragment extends Fragment implements CompoundButton.OnC
                 // Replace whatever is in the fragment_container view with this fragment,
                 // and add the transaction to the back stack
                 transaction.replace(R.id.mainContent, fragment, "submitDetailFragment");
+
                 //getFragmentManager().popBackStack();
 
                 transaction.addToBackStack(null);
 
-                try {
-                    Log.e("thread is sleeping","yes");
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
 
                 transaction.commit();
-
-
 
 
             }
@@ -179,12 +188,22 @@ public class PersonDetailFragment extends Fragment implements CompoundButton.OnC
 
 
 
-        new getContact().execute(serverUrl);
+        if (number.getText().equals("")){
+            Log.e("yyyyyyyyy",name.getText().toString());
+
+            new getContact().execute(serverUrl);
+        }
+
+
+        else{
+
+            Log.e("u already have a ","contact to call");
+        }
+
 
 
         return view;
     }
-
 
 
 
@@ -207,18 +226,15 @@ public class PersonDetailFragment extends Fragment implements CompoundButton.OnC
 
         if(isChecked){
 
-
             background.setBackgroundColor(getResources().getColor(R.color.accent));
 
             contBtn.setEnabled(true);
 
         }else{
 
-
             background.setBackgroundColor(getResources().getColor(R.color.grey));
 
             contBtn.setEnabled(false);
-
 
         }
     }
@@ -239,9 +255,8 @@ public class PersonDetailFragment extends Fragment implements CompoundButton.OnC
     }
 
 
-
-
     private class getContact extends AsyncTask<String, Void, String> {
+
 
         ProgressDialog dialog=new ProgressDialog(getActivity());
         @Override
@@ -253,8 +268,6 @@ public class PersonDetailFragment extends Fragment implements CompoundButton.OnC
             dialog.setProgress(0);
             dialog.show();
         }
-
-
 
 
         protected String doInBackground(String... urls) {
@@ -306,6 +319,7 @@ public class PersonDetailFragment extends Fragment implements CompoundButton.OnC
                 jsn = new JSONObject(st);
                 String myname = jsn.getString("name");
                 String mynumber = jsn.getString("number");
+                String recorder = jsn.getString("recorder");
                 lead_id  = jsn.getString("lead_id");
 
                 if (number.equals("")){
@@ -313,7 +327,9 @@ public class PersonDetailFragment extends Fragment implements CompoundButton.OnC
                 }
                 else{
                     name.setText(myname);
-                    number.setText(mynumber);
+                    //number.setText(mynumber);
+                    number.setText("01244326802");
+                    recordingTextView.setText("Recoding: "+ recorder);
 
                 }
 
